@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Rajeevan Amirtharajah Dept. of Electrical and Computer Engineering University of California, Davis" />
+  <title>EEC 214 Fall 2026 Homework #4</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"><strong><u>EEC 214 Fall 2026 Homework
+#4</u></strong></h1>
+<p class="author">Rajeevan Amirtharajah<br />
+Dept. of Electrical and Computer Engineering<br />
+University of California, Davis</p>
+<p class="date">Issued: October 19, 2026<br />
+Due: October 27, 2026, 11:59 PM by Canvas upload.</p>
+</header>
+<p><span><strong>Reference:</strong></span> Gray, Hurst, Lewis,
+Meyer <span class="citation" data-cites="graymeyer-book4"></span>. Any
+edition is fine.</p>
+<p>Use the following device parameters for the problems in this
+assignment.</p>
+<p><span><strong>NMOS Transistor Parameters:</strong></span></p>
+<ul>
+<li><p>Threshold Voltage
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mi>N</mi></mrow></msub><mo>=</mo><mn>349.7</mn></mrow><annotation encoding="application/x-tex">V_{TN} = 349.7</annotation></semantics></math>
+mV</p></li>
+<li><p>Min.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mn>270</mn></mrow><annotation encoding="application/x-tex">W = 270</annotation></semantics></math>
+nm</p></li>
+<li><p>Min.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>180</mn></mrow><annotation encoding="application/x-tex">L = 180</annotation></semantics></math>
+nm</p></li>
+<li><p>Process Transconductance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><msub><mi>C</mi><mrow><mi>o</mi><mi>x</mi></mrow></msub><mo>=</mo><mn>104.7</mn><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu C_{ox} = 104.7 \mu</annotation></semantics></math>A/V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mn>2</mn></msup><annotation encoding="application/x-tex">^{2}</annotation></semantics></math></p></li>
+<li><p>Body Effect Parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo>=</mo><mn>0.297</mn></mrow><annotation encoding="application/x-tex">\gamma = 0.297</annotation></semantics></math>
+V/V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><annotation encoding="application/x-tex">^{1/2}</annotation></semantics></math></p></li>
+<li><p>Channel Length Modulation Parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0.115</mn></mrow><annotation encoding="application/x-tex">\lambda = 0.115</annotation></semantics></math>
+V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">^{-1}</annotation></semantics></math></p></li>
+<li><p>Gate Oxide Capacitance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>o</mi><mi>x</mi></mrow></msub><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">C_{ox} = 10</annotation></semantics></math>
+fF/<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>m<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mn>2</mn></msup><annotation encoding="application/x-tex">^{2}</annotation></semantics></math></p></li>
+<li><p>Fermi Level
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mn>2</mn><msub><mi>ϕ</mi><mi>F</mi></msub><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mn>0.6</mn></mrow><annotation encoding="application/x-tex">|2\phi_{F}| = 0.6</annotation></semantics></math>
+V</p></li>
+</ul>
+<p><span><strong>PMOS Transistor Parameters:</strong></span></p>
+<ul>
+<li><p>Threshold Voltage
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>T</mi><mi>P</mi></mrow></msub><mo>=</mo><mi>−</mi><mn>269.5</mn></mrow><annotation encoding="application/x-tex">V_{TP} = -269.5</annotation></semantics></math>
+mV</p></li>
+<li><p>Min.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>=</mo><mn>270</mn></mrow><annotation encoding="application/x-tex">W = 270</annotation></semantics></math>
+nm</p></li>
+<li><p>Min.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mn>180</mn></mrow><annotation encoding="application/x-tex">L = 180</annotation></semantics></math>
+nm</p></li>
+<li><p>Process Transconductance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><msub><mi>C</mi><mrow><mi>o</mi><mi>x</mi></mrow></msub><mo>=</mo><mn>38.3</mn><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu C_{ox} = 38.3 \mu</annotation></semantics></math>A/V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mn>2</mn></msup><annotation encoding="application/x-tex">^{2}</annotation></semantics></math></p></li>
+<li><p>Body Effect Parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo>=</mo><mn>0.066</mn></mrow><annotation encoding="application/x-tex">\gamma = 0.066</annotation></semantics></math>
+V/V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msup><annotation encoding="application/x-tex">^{1/2}</annotation></semantics></math></p></li>
+<li><p>Channel Length Modulation Parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0.188</mn></mrow><annotation encoding="application/x-tex">\lambda = 0.188</annotation></semantics></math>
+V<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">^{-1}</annotation></semantics></math></p></li>
+<li><p>Gate Oxide Capacitance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>o</mi><mi>x</mi></mrow></msub><mo>=</mo><mn>10.7</mn></mrow><annotation encoding="application/x-tex">C_{ox} = 10.7</annotation></semantics></math>
+fF/<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>m<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi></mi><mn>2</mn></msup><annotation encoding="application/x-tex">^{2}</annotation></semantics></math></p></li>
+<li><p>Fermi Level
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mn>2</mn><msub><mi>ϕ</mi><mi>F</mi></msub><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mn>0.6</mn></mrow><annotation encoding="application/x-tex">|2\phi_{F}| = 0.6</annotation></semantics></math>
+V</p></li>
+</ul>
+<h1 id="sec:SCbuck">Switched-Capacitor 2:1 Buck Converter</h1>
+<p>Consider the following difference equation for the output voltage
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>o</mi><mi>u</mi><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">V_{out}</annotation></semantics></math>
+of an
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>:1
+step-down series-parallel switched-capacitor voltage converter:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>C</mi><mi>L</mi></msub><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mi>N</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><msub><mi>C</mi><mrow><mi>f</mi><mi>l</mi><mi>y</mi></mrow></msub><mo>+</mo><mfrac><mrow><msub><mi>T</mi><mrow><mi>S</mi><mi>W</mi></mrow></msub><mi>/</mi><mn>2</mn></mrow><msub><mi>R</mi><mi>L</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><msub><mi>V</mi><mrow><mi>o</mi><mi>u</mi><mi>t</mi></mrow></msub><mo stretchy="false" form="prefix">[</mo><mi>n</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>C</mi><mi>L</mi></msub><mo>−</mo><msub><mi>C</mi><mrow><mi>f</mi><mi>l</mi><mi>y</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo><msub><mi>V</mi><mrow><mi>o</mi><mi>u</mi><mi>t</mi></mrow></msub><mo stretchy="false" form="prefix">[</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">]</mo><mo>+</mo><msub><mi>C</mi><mrow><mi>f</mi><mi>l</mi><mi>y</mi></mrow></msub><msub><mi>V</mi><mrow><mi>i</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\begin{equation}
+\label{eq:SCdown}
+\left(C_{L} + (N-1)C_{fly} + \frac{T_{SW}/2}{R_{L}}\right) V_{out}[n] = (C_{L} -
+C_{fly})V_{out}[n-1]  + C_{fly}V_{in}
+\end{equation}</annotation></semantics></math></p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mi>L</mi></msub><annotation encoding="application/x-tex">C_{L}</annotation></semantics></math>
+is the load capacitance,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mrow><mi>f</mi><mi>l</mi><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">C_{fly}</annotation></semantics></math>
+is the flying capacitance,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mi>L</mi></msub><annotation encoding="application/x-tex">R_{L}</annotation></semantics></math>
+is the load resistance,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>i</mi><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">V_{in}</annotation></semantics></math>
+is the input voltage, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mrow><mi>S</mi><mi>W</mi></mrow></msub><annotation encoding="application/x-tex">T_{SW}</annotation></semantics></math>
+is the switching period of the converter. Note that to derive
+Equation <a href="#eq:SCdown" data-reference-type="ref"
+data-reference="eq:SCdown">[eq:SCdown]</a>, it was assumed that the
+charge delivered to the load during the series-connected phase
+ultimately came from the input voltage source and that the change in
+output voltage did not affect the current drawn by the load. A 50% duty
+cycle was also assumed.</p>
+<div id="sec:SCanalysis" class="prob">
+<p><strong>Problem 1</strong>. <em><span><em>Derive an expression for
+the steady-state value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><msub><mi>V</mi><mrow><mi>o</mi><mi>u</mi><mi>t</mi></mrow></msub><msub><mi>V</mi><mrow><mi>i</mi><mi>n</mi></mrow></msub></mfrac><annotation encoding="application/x-tex">\frac{V_{out}}{V_{in}}</annotation></semantics></math>
+using
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>-transform
+analysis similar to the approach in lecture for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">N=2</annotation></semantics></math>.
+Also, derive an expression for the output impedance of the converter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mrow><mi>o</mi><mi>u</mi><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">R_{out}</annotation></semantics></math>.</em>
+</span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:SCcalcOutputPlot" class="prob">
+<p><strong>Problem 2</strong>. <em></em></p>
+<p><em><em>Assume the following values for the converter:</em></em></p>
+<ul>
+<li><p><em>Input Voltage
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mn>1.8</mn></mrow><annotation encoding="application/x-tex">V_{in} = 1.8</annotation></semantics></math>
+V</em></p></li>
+<li><p><em>Flying Capacitance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>f</mi><mi>l</mi><mi>y</mi></mrow></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">C_{fly} = 1</annotation></semantics></math>
+pF</em></p></li>
+<li><p><em>Load Capacitance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mi>L</mi></msub><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">C_{L} = 10</annotation></semantics></math>
+pF</em></p></li>
+<li><p><em>Switching Frequency
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>S</mi><mi>W</mi></mrow></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">f_{SW} = 1</annotation></semantics></math>
+MHz</em></p></li>
+</ul>
+<p><em>Assume the converter load resistance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mi>L</mi></msub><annotation encoding="application/x-tex">R_{L}</annotation></semantics></math>
+can take on the following values: 100
+M<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>,
+10
+M<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>,
+1
+M<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>,
+100
+k<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>,
+10
+k<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>,
+and 1
+k<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>.
+Calculate the steady-state
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>o</mi><mi>u</mi><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">V_{out}</annotation></semantics></math>
+value using your expression from Problem <a href="#sec:SCanalysis"
+data-reference-type="ref" data-reference="sec:SCanalysis">1</a> for each
+value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mi>L</mi></msub><annotation encoding="application/x-tex">R_{L}</annotation></semantics></math>
+and plot it versus load resistance on a semilog plot (the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>-axis
+is load resistance). Does your analytical model match your expectations?
+Discuss the source of any discrepancies.</em></p>
+<div class="sol">
+
+</div>
+</div>
+<h1 id="sec:SCbuckTheory">Switched-Capacitor 3:1 Converter Charge
+Multiplier Vector Analysis</h1>
+<div id="sec:SC2to1schem" class="prob">
+<p><strong>Problem 3</strong>. <em><span><em>Draw and fully label a
+schematic for a 3:1 series-parallel switched-capacitor voltage
+downconverter. Model the output load as an ideal voltage source with
+voltage
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>V</mi><mrow><mi>O</mi><mi>U</mi><mi>T</mi></mrow></msub><annotation encoding="application/x-tex">V_{OUT}</annotation></semantics></math>.</em>
+</span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:SCchargeTransfer" class="prob">
+<p><strong>Problem 4</strong>. <em><span><em>Verify using the charge
+transfer/charge multiplier vector analysis technique from Seeman <span
+class="citation" data-cites="seemanSwitCap08"></span> that the circuit
+you drew in Problem <a href="#sec:SC2to1schem" data-reference-type="ref"
+data-reference="sec:SC2to1schem">3</a> has a 3:1 voltage conversion
+ratio.</em> </span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:SCSSL" class="prob">
+<p><strong>Problem 5</strong>. <em><span><em>Derive an expression for
+the output impedance of the converter in the slow-switching limit
+(SSL).</em> </span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:SCFSL" class="prob">
+<p><strong>Problem 6</strong>. <em><span><em>Derive an expression for
+the output impedance of the converter in the fast-switching limit (FSL).
+Explain whether your answer makes intuitive sense or not and why.</em>
+</span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<figure id="fig:FibonacciBoost" data-latex-placement="htp">
+<div class="center">
+<p><img src="./FibonacciBoost5.png" style="width:100.0%"
+alt="Fibonacci switched-capacitor converter schematic. Input source V_IN connects to three flying capacitor cells. Each cell has a top-plate switch connected to the top plate of the cell to the left or the output source V_OUT (SW3, SW6, SW9, SW10), a first bottom-plate switch connected to ground (SW1, SW4, SW7), and a second bottom-plate switch connected to the top plate (SW2, SW5, SW8). Odd-numbered switches are controlled by clock phi1. Even-numbered switches are controlled by clock phi2." /></p>
+</div>
+<figcaption>Fibonacci switched-capacitor converter.</figcaption>
+</figure>
+<h1 id="sec:FibonacciSCTheory">Fibonacci Switched-Capacitor Converter
+Charge Multiplier Vector Analysis</h1>
+<div id="sec:FibChargeVecs" class="prob">
+<p><strong>Problem 7</strong>. <em><span><em>Find the capacitor charge
+transfer/charge multiplier vectors
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi mathvariant="bold-italic">𝒂</mi><mi mathvariant="bold-italic">𝒄</mi><mn mathvariant="bold">𝟏</mn></msubsup><annotation encoding="application/x-tex">\mathbf{a_{c}^{1}}</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi mathvariant="bold-italic">𝒂</mi><mi mathvariant="bold-italic">𝒄</mi><mn mathvariant="bold">𝟐</mn></msubsup><annotation encoding="application/x-tex">\mathbf{a_{c}^{2}}</annotation></semantics></math>
+for the Fibonacci converter in Figure <a href="#fig:FibonacciBoost"
+data-reference-type="ref" data-reference="fig:FibonacciBoost">1</a>.
+Calculate the voltage conversion ratio
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>O</mi><mi>U</mi><mi>T</mi></mrow></msub><mi>/</mi><msub><mi>V</mi><mrow><mi>I</mi><mi>N</mi></mrow></msub></mrow><annotation encoding="application/x-tex">V_{OUT}/V_{IN}</annotation></semantics></math>.</em>
+</span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:FibSwitchVecs" class="prob">
+<p><strong>Problem 8</strong>. <em><span><em>Find the corresponding
+switch resistance charge transfer/charge multiplier vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="bold-italic">𝒂</mi><mi mathvariant="bold-italic">𝒓</mi></msub><annotation encoding="application/x-tex">\mathbf{a_{r}}</annotation></semantics></math>.</em>
+</span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:FibOptCaps" class="prob">
+<p><strong>Problem 9</strong>. <em><span><em>Suppose an on-chip
+implementation of the converter in Figure <a href="#fig:FibonacciBoost"
+data-reference-type="ref" data-reference="fig:FibonacciBoost">1</a> is
+constrained to 10 pF total capacitance. Calculate the optimal
+capacitances for each capacitor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mn>1</mn></msub><annotation encoding="application/x-tex">C_{1}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mn>2</mn></msub><annotation encoding="application/x-tex">C_{2}</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mn>3</mn></msub><annotation encoding="application/x-tex">C_{3}</annotation></semantics></math>
+and the corresponding optimal slow-switching limit resistance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>R</mi><mrow><mi>S</mi><mi>S</mi><mi>L</mi></mrow><mo>*</mo></msubsup><annotation encoding="application/x-tex">R^{*}_{SSL}</annotation></semantics></math>
+assuming a 2 MHz switching frequency.</em> </span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:FibOptSwitches" class="prob">
+<p><strong>Problem 10</strong>. <em><span><em>Suppose an on-chip
+implementation of the converter in Figure <a href="#fig:FibonacciBoost"
+data-reference-type="ref" data-reference="fig:FibonacciBoost">1</a> is
+constrained to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mspace width="0.222em"></mspace><mi mathvariant="normal">Ω</mi></mrow><annotation encoding="application/x-tex">1\ \Omega</annotation></semantics></math>
+total switch resistance (1 S total switch conductance). Calculate the
+optimal conductances for each switch
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>W</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">SW_{1}</annotation></semantics></math>
+through
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><msub><mi>W</mi><mn>10</mn></msub></mrow><annotation encoding="application/x-tex">SW_{10}</annotation></semantics></math>
+and the corresponding optimal slow-switching limit resistance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>R</mi><mrow><mi>F</mi><mi>S</mi><mi>L</mi></mrow><mo>*</mo></msubsup><annotation encoding="application/x-tex">R^{*}_{FSL}</annotation></semantics></math>
+assuming a 2 MHz switching frequency.</em> </span></em></p>
+<div class="sol">
+
+</div>
+</div>
+<div id="sec:FibVoltVecs" class="prob">
+<p><strong>Problem 11</strong>. <em><span><em>(<strong>Extra
+Credit</strong>) Find the capacitor voltage vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="bold-italic">𝒗</mi><mi mathvariant="bold-italic">𝒄</mi></msub><annotation encoding="application/x-tex">\mathbf{v_{c}}</annotation></semantics></math>
+and switch blocking voltage vector
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="bold-italic">𝒗</mi><mi mathvariant="bold-italic">𝒓</mi></msub><annotation encoding="application/x-tex">\mathbf{v_{r}}</annotation></semantics></math>
+for the Figure <a href="#fig:FibonacciBoost" data-reference-type="ref"
+data-reference="fig:FibonacciBoost">1</a>
+converter.</em></span></em></p>
+<div class="sol">
+
+</div>
+</div>
+</body>
+</html>
